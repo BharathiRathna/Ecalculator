@@ -1,14 +1,14 @@
 <?php
 class User
 {
-    private $userTable ='expense_users';
+    private $userTable ='users_expense';
     private $conn;
 
     public function __construct($db)
     {
         $this->conn = $db;
     }
-
+    
     public function listUsers()
     {
         // Query for resgister form
@@ -170,6 +170,7 @@ class User
         if($this->email && $this->password)
         {
             $sqlQuery = " SELECT * FROM ". $this->userTable." WHERE email = ? AND password = ? ";
+            
             $stmt = $this->conn->prepare($sqlQuery);
             $password = md5($this->password);
             $stmt->bind_param("ss", $this->email,$password);
@@ -177,7 +178,9 @@ class User
             $result = $stmt->get_result();
             if($result->num_rows > 0)
             {
-                $user = $result-fetch_assoc();
+                $user = mysqli_fetch_assoc($result);
+
+                // $user = $result-fetch_assoc();
                 $_SESSION["userid"] = $user['id'];
                 $_SESSION["role"] = $user['role'];
                 $_SESSION["name"] = $user['email'];

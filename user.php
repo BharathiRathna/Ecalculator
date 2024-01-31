@@ -6,7 +6,7 @@ $database = new Database();
 $db = $database->getConnection();
 
 $user = new User($db);
-$expense = new Expense($db);
+// $expense = new Expense($db);
 
 if(!$user->loggedIn())
 {
@@ -23,6 +23,8 @@ include('inc/header.php');
 <script src="js/general.js"></script>
 <script src="js/user.js"></script>
 <?php include('inc/container.php');?>
+
+
 <div class="container">
     <h2> Expense Calculator System</h2><br>
     <?php include_once('top_menus.php');?>
@@ -50,6 +52,7 @@ include('inc/header.php');
         </table>
     </div>
 
+    <!--Add User Form  -->
     <div id="userModal" class = "modal fade">
         <div class="modal-dialog">
             <form action="" method ="post" id="userForm">
@@ -100,5 +103,7 @@ include('inc/header.php');
             </form>
         </div>
     </div>
+
+    <!--End Add User Form  -->
 </div>
  <?php include_once ('inc/footer.php'); ?>
