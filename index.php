@@ -4,14 +4,12 @@ include_once 'class/User.php';
 
 $database = new Database();
 $db = $database->getConnection();
-
 $user = new User($db);
 
 if($user->loggedIn())
 {
     header("Location :expense.php");
 }
-
 $loginMessage ='';
 if(!empty($_POST["login"]) && !empty($_POST["email"]) && !empty($_POST["password"]))
 {
@@ -28,15 +26,13 @@ if(!empty($_POST["login"]) && !empty($_POST["email"]) && !empty($_POST["password
 }
 
 include_once('inc/header.php');
-// include_once('inc\container.php');
 ?>
 <!--Login Form  -->
-
-<div class="content">
+<div class="content main">
     <div class="container-fluid">
         <div class="col-md-6">
-            <div class="panel panel-info">
-                <div class="panel-heading" style = "background:#00796B;color:white;">
+            <div class="panel panel-info login-form">
+                <div class="panel-heading login-title">
                     <div class= "panel-title">
                         Log In
                     </div>
@@ -46,7 +42,6 @@ include_once('inc/header.php');
                         <div id="login-alert" class="alert alert-dander col-sm-12"><?php echo $loginMessage; ?>
                         </div>
                     <?php }?>
-
                     <form id ="loginform" class ="form-horizontal" role="form" method="POST"> 
                         <div style= "margin-bottom :25px" class="input-group">
                             <span class="input-group-addon">
@@ -60,7 +55,6 @@ include_once('inc/header.php');
                             </span>
                             <input type="password" class="form-control" id="password" name="password" value="<?php if(!empty($_POST["password"])) { echo $_POST["password"]; } ?>" placeholder="password" required>
                         </div>
-
                         <div style="margin-top:10px" class="form-group">
                             <div class="col-sm-12 controls">
                                 <input type="submit" name="login" value="Login" class="btn btn-info">
@@ -73,7 +67,4 @@ include_once('inc/header.php');
     </div>
 </div>
 <!--End Login Form-->
-
-
-
 <?php include_once('inc/footer.php'); ?>
