@@ -28,16 +28,16 @@ if(!empty($_POST["login"]) && !empty($_POST["email"]) && !empty($_POST["password
 include_once('inc/header.php');
 ?>
 <!--Login Form  -->
-<div class="content main">
+<div class="content">
     <div class="container-fluid">
         <div class="col-md-6">
             <div class="panel panel-info login-form">
-                <div class="panel-heading login-title">
+                <div class="panel-heading ">
                     <div class= "panel-title">
                         Log In
                     </div>
                 </div>
-                <div style= "padding-top:30px"class="panel-body">
+                <div style= "padding-top:30px" class="panel-body">     
                     <?php if($loginMessage != '') { ?>
                         <div id="login-alert" class="alert alert-dander col-sm-12"><?php echo $loginMessage; ?>
                         </div>
