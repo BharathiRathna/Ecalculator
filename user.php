@@ -47,12 +47,12 @@ include('inc/header.php');
         </table>
     </div>
     <!--Add User Form  -->
-    <div id="userModal" class = "modal fade">
+    <div id="userModal" class= "modal fade">
         <div class="modal-dialog">
             <form action="" method ="post" id="userForm">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type ="button" class="close" data-dismiss ="modal">$times;</button>
+                        <button type="button" class="close" data-dismiss ="modal">$times;</button>
                         <h4 class ="modal-title"><i class="fa fa-plus"></i> Edit User</h4>
                     </div>
                     <div class="modal-body">
