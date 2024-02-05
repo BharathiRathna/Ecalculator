@@ -9,7 +9,7 @@ $user = new User($db);
 
 if(!$user->loggedIn())
 {
-    header("Location: index.php");
+    header("Location: user.php");
 }
 include('inc/header.php');
 ?>
@@ -18,7 +18,8 @@ include('inc/header.php');
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css" />
 <script src="js/general.js"></script>
 <script src="js/user.js"></script>
-<?php include('inc/container.php');?>
+
+<?php// include('inc/container.php');?> 
 <div class="container">
     <h2> Expense Calculator System</h2><br>
     <?php include_once('TopMenus.php');?>
@@ -28,8 +29,8 @@ include('inc/header.php');
                 <div class="col-md-10">
                     <h3 class="panel-title"></h3>
                 </div>
-                <div class="col-md-2 adduser"> <!--style = "align : right";-->
-                    <button id="adduser" class="btn btn-info" title ="Add User">
+                <div class="col-md-2"> <!--style = "align : right";-->
+                    <button id="addUser" class="btn btn-info" title ="Add User">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </div>
@@ -49,10 +50,10 @@ include('inc/header.php');
     <!--Add User Form  -->
     <div id="userModal" class= "modal fade">
         <div class="modal-dialog">
-            <form action="" method ="post" id="userForm">
+            <form action="UserAction.php" method ="post" id="userForm">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss ="modal">$times;</button>
+                        <button type="button" class="close" data-dismiss ="modal">&times;</button>
                         <h4 class ="modal-title"><i class="fa fa-plus"></i> Edit User</h4>
                     </div>
                     <div class="modal-body">
@@ -66,7 +67,7 @@ include('inc/header.php');
                         </div>
                         <div class="form-group">
                             <label for="Income" class="control-label">First Name</label>
-                            <input type="text" naem= "first_name" id="first_name" autocomplete ="off" class="form-control" placeholder="First name">
+                            <input type="text" name= "first_name" id="first_name" autocomplete ="off" class="form-control" placeholder="First name">
                         </div>
                         <div class="form-group">
                             <label for="project" class="control-label">Last Name</label>

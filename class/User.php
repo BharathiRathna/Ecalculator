@@ -181,7 +181,7 @@ class User
                 $user = mysqli_fetch_assoc($result);
 
                 // $user = $result-fetch_assoc();
-                $_SESSION["userid"] = $user['id'];
+                $_SESSION["user_id"] = $user['id'];
                 $_SESSION["role"] = $user['role'];
                 $_SESSION["name"] = $user['email'];
                 return 1;

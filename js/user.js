@@ -1,5 +1,4 @@
 $(document).ready(function(){	
-
 	var userRecords = $('#userListing').DataTable({
 		"lengthChange": false,
 		"processing":true,
@@ -69,7 +68,7 @@ $(document).ready(function(){
 		$('#save').attr('disabled','disabled');
 		var formData = $(this).serialize();
 		$.ajax({
-			url:"user_action.php",
+			url:"UserAction.php",
 			method:"POST",
 			data:formData,
 			success:function(data){				
