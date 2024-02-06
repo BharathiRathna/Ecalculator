@@ -8,9 +8,9 @@ $(document).ready(function(){
 		'serverMethod': 'post',		
 		"order":[],
 		"ajax":{
-			url:"expense_category_action.php",
+			url:"ExpenseCategoryAction.php",
 			type:"POST",
-			data:{action:'listCateogry'},
+			data:{action:'listCategory'},
 			dataType:"json"
 		},
 		"columnDefs":[
@@ -39,7 +39,7 @@ $(document).ready(function(){
 		var id = $(this).attr("id");
 		var action = 'getCategoryDetails';
 		$.ajax({
-			url:'expense_category_action.php',
+			url:'ExpenseCategoryAction.php',
 			method:"POST",
 			data:{id:id, action:action},
 			dataType:"json",
@@ -67,7 +67,7 @@ $(document).ready(function(){
 		$('#save').attr('disabled','disabled');
 		var formData = $(this).serialize();
 		$.ajax({
-			url:"expense_category_action.php",
+			url:"ExpenseCategoryAction.php",
 			method:"POST",
 			data:formData,
 			success:function(data){				
@@ -84,7 +84,7 @@ $(document).ready(function(){
 		var action = "deleteCategory";
 		if(confirm("Are you sure you want to delete this record?")) {
 			$.ajax({
-				url:"expense_category_action.php",
+				url:"ExpenseCategoryAction.php",
 				method:"POST",
 				data:{id:id, action:action},
 				success:function(data) {					
