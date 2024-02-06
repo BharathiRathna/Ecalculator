@@ -12,9 +12,9 @@ class Expense {
 
     public function listExpense()
     {
-        if($_SESSION["userid"])
+        if($_SESSION["user_id"])
         {
-            $sqlQuery = "SELECT expense.id,expense.amount,expense.date,category.name FROM ".$this->expenseTable."AS expense LEFT JOIN ".$this->categoryTable." AS category ON expense.category_id = category.id WHERE expense.user_id = '".$_SESSION["userid"]."' ";
+            $sqlQuery = "SELECT expense.id,expense.amount,expense.date,category.name FROM ".$this->expenseTable."AS expense LEFT JOIN ".$this->categoryTable." AS category ON expense.category_id = category.id WHERE expense.user_id = '".$_SESSION["user_id"]."' ";
 
             if(!empty($_POST["search"]["value"]))
             {
@@ -75,7 +75,7 @@ class Expense {
 
     public function insert()
     {		
-		if($this->expense_categories && $this->amount && $_SESSION["userid"]) 
+		if($this->expense_categories && $this->amount && $_SESSION["user_id"]) 
         {
 			$stmt = $this->conn->prepare("
 				INSERT INTO ".$this->expenseTable."(`amount`, `date`, `category_id`, `user_id`)
@@ -84,7 +84,7 @@ class Expense {
 			$this->expense_date = htmlspecialchars(strip_tags($this->expense_date));
 			$this->expense_categories = htmlspecialchars(strip_tags($this->expense_categories));
 			
-			$stmt->bind_param("isii", $this->amount, $this->expense_date, $this->expense_categories, $_SESSION["userid"]);
+			$stmt->bind_param("isii", $this->amount, $this->expense_date, $this->expense_categories, $_SESSION["user_id"]);
 			
 			if($stmt->execute()){
 				return true;
@@ -94,7 +94,7 @@ class Expense {
 
     public function update()
     {		
-		if($this->id && $this->expense_categories && $this->amount && $_SESSION["userid"]) 
+		if($this->id && $this->expense_categories && $this->amount && $_SESSION["user_id"]) 
         {
 			
 			$stmt = $this->conn->prepare("
@@ -117,7 +117,7 @@ class Expense {
 
     public function delete()
     {
-        if($this->id && $_SESSION["userid"])
+        if($this->id && $_SESSION["user_id"])
         {
             $stmt = $this->conn->prepare("DELETE FROM ".$this->expenseTable." WHERE id =?");
             $this->id = htmlspecialchars(strip_tags($this->id));
@@ -131,7 +131,7 @@ class Expense {
 
     public function getExpenseDetails()
     {
-        if($this->income_id && $_SESSION["userid"])
+        if($this->income_id && $_SESSION["user_id"])
         {
             $sqlQuery = "SELECT expense.id,expense.amount,expense.date,expense.category_id FROM ".$this->expenseTable." AS expense left JOIN ".$this->categoryTable." AS category ON expense.category_id = category.id WHERE expense.id = ?";
 
@@ -211,7 +211,7 @@ class Expense {
 
     public function insertCategory()
     {
-        if($this->categoryName && $_SESSION["userid"])
+        if($this->categoryName && $_SESSION["user_id"])
         {
             $stmt = $this->conn->prepare(" INSERT INTO ".$this->categoryTable." (`name`,`status`) VALUES (?, ?)");
 
@@ -229,7 +229,7 @@ class Expense {
 
     public function updateCategory()
     {
-        if($this->id && $this->categoryName && $_SESSION["userid"])
+        if($this->id && $this->categoryName && $_SESSION["user_id"])
         {
             $stmt = $this->conn->prepare("UPDATE ".$this->categoryTable."SET name = ?, status = ? WHERE id =?");
 
@@ -246,7 +246,7 @@ class Expense {
 
     public function getCategoryDetails()
     {
-        if($this->id && $_SESSION["userid"])
+        if($this->id && $_SESSION["user_id"])
         {
             $sqlQuery ="SELECT id,name,status FROM ".$this->categoryTable." WHERE id =?";
 
@@ -271,7 +271,7 @@ class Expense {
     }
 
     public function deleteCategory(){
-		if($this->id && $_SESSION["userid"]) {			
+		if($this->id && $_SESSION["user_id"]) {			
 
 			$stmt = $this->conn->prepare("
 				DELETE FROM ".$this->categoryTable." 

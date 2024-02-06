@@ -93,7 +93,7 @@ class User
 
     public function update()
     {
-        if($this->role && $this->email && $_SESSION["userid"])
+        if($this->role && $this->email && $_SESSION["user_id"])
         {
             $updatePass = '';
             if($this->passward)
@@ -119,7 +119,7 @@ class User
     }
 
     public function delete(){
-		if($this->id && $_SESSION["userid"]) {			
+		if($this->id && $_SESSION["user_id"]) {			
 
 			$stmt = $this->conn->prepare("
 				DELETE FROM ".$this->userTable." 
@@ -137,7 +137,7 @@ class User
 
     public function getUserDetails()
     {
-        if($this->user_id && $_SESSION["userid"])
+        if($this->user_id && $_SESSION["user_id"])
         {
             
             $sqlQuery = "
@@ -179,8 +179,6 @@ class User
             if($result->num_rows > 0)
             {
                 $user = mysqli_fetch_assoc($result);
-
-                // $user = $result-fetch_assoc();
                 $_SESSION["user_id"] = $user['id'];
                 $_SESSION["role"] = $user['role'];
                 $_SESSION["name"] = $user['email'];
@@ -197,7 +195,7 @@ class User
 
     public function loggedIn ()
     {
-        if(!empty($_SESSION["userid"]))
+        if(!empty($_SESSION["user_id"]))
         {
             return 1;
         }else

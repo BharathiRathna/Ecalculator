@@ -11,7 +11,7 @@ $expense = new Expense($db);
 
 if(!$user->loggedIn())
 {
-    header("Location :index.php");
+    header('Location:index.php');    
 }
 include('inc/header.php');
 ?>

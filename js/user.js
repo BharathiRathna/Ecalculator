@@ -7,7 +7,7 @@ $(document).ready(function(){
 		'serverMethod': 'post',		
 		"order":[],
 		"ajax":{
-			url:"user_action.php",
+			url:"UserAction.php",
 			type:"POST",
 			data:{action:'listUsers'},
 			dataType:"json"
@@ -26,7 +26,7 @@ $(document).ready(function(){
 			backdrop: 'static',
 			keyboard: false
 		});		
-		$("#userModal").on("shown.bs.modal", function () {
+		$("#userModal").on("shown.bs.modal", function() {
 			$('#userForm')[0].reset();				
 			$('.modal-title').html("<i class='fa fa-plus'></i> Add user");					
 			$('#action').val('addUser');
@@ -38,7 +38,7 @@ $(document).ready(function(){
 		var id = $(this).attr("id");
 		var action = 'getUserDetails';
 		$.ajax({
-			url:'user_action.php',
+			url:'UserAction.php',
 			method:"POST",
 			data:{id:id, action:action},
 			dataType:"json",
@@ -85,7 +85,7 @@ $(document).ready(function(){
 		var action = "deleteUser";
 		if(confirm("Are you sure you want to delete this record?")) {
 			$.ajax({
-				url:"user_action.php",
+				url:"UserAction.php",
 				method:"POST",
 				data:{id:id, action:action},
 				success:function(data) {					
