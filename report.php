@@ -26,75 +26,43 @@ include('inc/header.php');
 <div class="container" style="">
     <h2>Expense Management System</h2><br>
     <?php include('TopMenus.php'); ?>
-    <div>
-        <div class="panel-heading">
-            <div class="row">
-                <div class="col-md-10">
-                    <h3 class="panel-title"></h3>
-                </div>
-                <div class="col-md-2">
-                    <button type="button" id="addUser" class="btn btn-info" title="Add user"><span class="glyphicon glyphicon-plus"></span></button>
-                </div>
-            </div>
-        </div>
-        <table id="userListing" class="table table-bordered table-stripped">
-            <thead>
-                <tr>
-                    <th>S.no</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-
-    <div id ="userModal" class="modal fade">
-        <div class="modal-dialog">
-            <form action="" method="POST" id="userForm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"><i class="fa fa-plus"></i>Edit User</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="country" class="control-label">Role</label>
-                            <select name="role" id="role" class="form-control">
-                                <option value="">Select Role</option>
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="project" class="control-label">First Name</label>
-                            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First name" >			
-                        </div>
-
-                        <div class="form-group">
-                            <label for="project" class="control-label">Last Name</label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last name" >			
-                        </div>	
-
-                        <div class="form-group">
-                            <label for="project" class="control-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" >			
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="project" class="control-label">New Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="password" >			
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="hidden" name="id" id="id" />						
-                        <input type="hidden" name="action" id="action" value="" />
-                        <input type="submit" name="save" id="save" class="btn btn-info" value="Save" />
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
+    <div> 	
+		<div class="panel-heading">
+			<div class="row">	
+				<div>
+					<h4>View Income and Expense Reports</h4>
+				</div>
+				<div class="col-md-2" style="padding-left:0px;">
+					<input type="date" class="form-control" id="from_date" name="from_date" placeholder="From date" >
+				</div>
+				<div class="col-md-2" style="padding-left:0px;">
+					<input type="date" class="form-control" id="to_date" name="to_date" placeholder="To date" >
+				</div>
+				<div class="col-md-2" style="padding-left:0px;">
+					<button type="submit" id="viewReport" class="btn btn-info" title="View Report"><span class="glyphicon glyphicon-search"></span></button>
+				</div>
+			</div>
+		</div>
+		<table class="table table-bordered table-striped" id="reportTable" style="display:none;">
+			<thead>
+				<tr>									
+					<th>Expense</th>					
+					<th>Date</th>
+					<th>Category</th>									
+				</tr>				
+			</thead>
+			<tbody id="listReports">
+			
+			</tbody>
+		</table>
+		<div class="panel-heading" id="detailSection" style="display:none;">
+			<div class="row">		
+				<div style="padding-bottom:5px;color:green"><strong>Total Income : </strong><span id="totalIncome"></span></div>
+				<div style="padding-bottom:5px;color:red"><strong>Total Expense : </strong><span id="totalExpense"></span></div>
+				<div style="padding-bottom:5px;color:blue"><strong>Total Saving : </strong><span id="totalSaving"></span></div>
+			</div>
+		</div>
+		<div class="panel-heading" id="noRecords" style="display:none;">
+		</div>
+	</div>
 </div>

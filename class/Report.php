@@ -13,7 +13,7 @@ class Report
 
     public function getReports()
     {
-        if($this->fromDate && $this->toDate && $_SESSION["user_id"])
+        if($this->fromDate && $this->toDate && $_SESSION["userid"])
         {
             // IncomeReport
             $sqlQuery = "SELECT expense.id, expense.amount, expense.date, category.name AS category
