@@ -9,7 +9,7 @@ $user = new User($db);
 
 if(!$user->loggedIn())
 {
-    header("Location: user.php");
+    header("Location: index.php");
 }
 include('inc/header.php');
 ?>
@@ -36,13 +36,15 @@ include('inc/header.php');
                 </div>
             </div>
         </div>
-        <table class=" table table-bordered table-striped">
+        <table id="userListing" class=" table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>S.No</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
         </table>

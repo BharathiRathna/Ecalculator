@@ -16,7 +16,7 @@ include_once ('inc/header.php');
 <script src="js/dataTables.bootstrap.min.js"></script>		
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css" />
 <script src="js/general.js"></script>
-<script src="js/expense_category.js"></script>
+<script src="js/ExpenseCategory.js"></script>
 <div class="container">
     <h2>Expense Management System</h2><br>
     <?php include_once('TopMenus.php');?>
@@ -42,7 +42,7 @@ include_once ('inc/header.php');
     </table>
 
 
-    <div id="categorymodal class= modal fade">
+    <div id="categoryModal" class= "modal fade">
         <div class="modal-dialog">
             <form action="" method="POST" id="categoryForm">
                 <div class="modal-content">

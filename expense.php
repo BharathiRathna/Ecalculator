@@ -41,6 +41,8 @@ include('inc/header.php');
                     <th>Amount</th>
                     <th>Category</th>
                     <th>Date</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
         </table>
