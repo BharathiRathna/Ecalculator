@@ -1,7 +1,8 @@
 <?php 
+
 include_once 'config/Database.php';
 include_once 'class/User.php';
-include_once 'class/Expense';
+include_once 'class/Expense.php';
 
 $database = new Database();
 $db = $database->getConnection();
@@ -21,6 +22,7 @@ include('inc/header.php');
 <link rel="stylesheet" href="css/dataTables.bootstrap.min.css" />
 <script src="js/general.js"></script>
 <script src="js/user.js"></script>
+<script src="js/report.js"></script>
 <div class="container" style="">
     <h2>Expense Management System</h2><br>
     <?php include('TopMenus.php'); ?>
@@ -52,7 +54,7 @@ include('inc/header.php');
             <form action="" method="POST" id="userForm">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss>&times;</button>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title"><i class="fa fa-plus"></i>Edit User</h4>
                     </div>
                     <div class="modal-body">
