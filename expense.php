@@ -11,7 +11,7 @@ $expense = new Expense($db);
 
 if(!$user->loggedIn())
 {
-    header("Location :index.php");
+    header('Location:index.php');    
 }
 include('inc/header.php');
 ?>
@@ -41,6 +41,8 @@ include('inc/header.php');
                     <th>Amount</th>
                     <th>Category</th>
                     <th>Date</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
         </table>

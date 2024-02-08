@@ -1,6 +1,6 @@
-$(document).ready(function(){	
-
-	var categoryRecords = $('#categoryListing').DataTable({
+$(document).ready(function()
+{
+		var categoryRecords = $('#categoryListing').DataTable({
 		"lengthChange": false,
 		"processing":true,
 		"serverSide":true,		
