@@ -1,4 +1,5 @@
-$(document).ready(function(){
+$(document).ready(function()
+{
 	var urlPath = window.location.pathname,
     urlPathArray = urlPath.split('.'),
     tabId = urlPathArray[0].split('/').pop();
