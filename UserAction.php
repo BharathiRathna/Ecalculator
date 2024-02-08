@@ -12,7 +12,7 @@ if(!empty($_POST['action']) && $_POST['action'] == 'listUsers')
 }
 if(!empty($_POST['action']) && $_POST['action'] == 'getUserDetails')
 {
-    $user->user_id = $_POST['id'];
+    $user->userid = $_POST['id'];
     $user->getUserDetails();
 }
 if(!empty($_POST['action']) && $_POST['action'] == 'addUser')
