@@ -1,7 +1,7 @@
 <?php
 class User 
 {	   
-	private $userTable = 'users_expense';	
+	private $userTable = 'users';	
 	private $conn;
 	
 	public function __construct($db){
