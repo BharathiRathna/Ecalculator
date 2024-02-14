@@ -20,26 +20,30 @@ include_once ('inc/header.php');
 <div class="container">
     <h2>Expense Management System</h2><br>
     <?php include_once('TopMenus.php');?>
-    <div class="panel-heading">
-        <div class="row">
-            <div class="col-md-10">
-                <h3 class="panel-title"></h3>
+    <div>
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-10">
+                    <h3 class="panel-title"></h3>
+                </div>
+                <div class="col-md-2" align="right">
+                    <button type="button" id="addCategory" class="btn btn-info" title="Add Category"><span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </div>
             </div>
-            <div class="col-md-2" style = "align:right";>
-				<button type="button" id="addCategory" class="btn btn-info" title="Add Category"><span class="glyphicon glyphicon-plus"></span>
-                </button>
-			</div>
         </div>
+        <table id="categoryListing" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Sn.</th>					
+					<th>Category</th>					
+					<th>Status</th>					
+					<th>Edit</th>
+					<th>Delete</th>             
+                </tr>
+            </thead>
+        </table>
     </div>
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>S.no</th>
-                <th>Category</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-    </table>
 
 
     <div id="categoryModal" class= "modal fade">

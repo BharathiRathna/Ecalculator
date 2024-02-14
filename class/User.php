@@ -1,6 +1,6 @@
 <?php
-class User {	
-   
+class User 
+{	   
 	private $userTable = 'users';	
 	private $conn;
 	
@@ -8,7 +8,8 @@ class User {
         $this->conn = $db;
     }
 
-	public function listUsers(){		
+	public function listUsers()
+    {		
 		
 		$sqlQuery = "SELECT id, first_name, last_name, email, password, role
 			FROM ".$this->userTable." ";			
@@ -132,7 +133,7 @@ class User {
 	}
 	
 	public function getUserDetails(){
-		if($this->user_id && $_SESSION["userid"]) {			
+		if($this->userid && $_SESSION["userid"]) {			
 					
 			$sqlQuery = "
 				SELECT id, first_name, last_name, email, password, role

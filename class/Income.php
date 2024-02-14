@@ -78,7 +78,7 @@ class Income
         {
 			$stmt = $this->conn->prepare("
 				INSERT INTO ".$this->incomeTable."(`amount`, `date`, `category_id`, `user_id`)
-				VALUES(?, ?, ?)");
+				VALUES(?, ?, ?, ?)");
 		
 			$this->amount = htmlspecialchars(strip_tags($this->amount));
 			$this->income_date = htmlspecialchars(strip_tags($this->income_date));

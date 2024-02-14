@@ -8,7 +8,7 @@ $user = new User($db);
 
 if($user->loggedIn())
 {
-    header("Location :expense.php");
+    echo '<script>window.location.href="expense.php"</script>';
 }
 $loginMessage ='';
 if(!empty($_POST["login"]) && !empty($_POST["email"]) && !empty($_POST["password"]))

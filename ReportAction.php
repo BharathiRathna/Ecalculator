@@ -7,7 +7,7 @@ $db = $database->getConnection();
 
 $report = new Report($db);
 
-if(!empty($_POST['action']) && $_POST['action'] == 'getReport')
+if(!empty($_POST['action']) && $_POST['action'] == 'getReports')
 {
     $report->fromDate = $_POST['fromDate'];
     $report->toDate = $_POST['toDate'];

@@ -29,12 +29,12 @@ include('inc/header.php');
                 <div class="col-md-10">
                     <h3 class="panel-title"></h3>
                 </div>
-                <div class="col-md-2" style= "align : right";>
+                <div class="col-md-2" align="right">
                 <button type ="button" id="addExpense" class="btn btn-info" title="Add expense"><span class="glyphicon glyphicon-plus"></span></button>
                 </div>
             </div>
         </div>
-        <table class="table table-bordered table-striped">
+        <table id="expenseListing" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>S.no</th>

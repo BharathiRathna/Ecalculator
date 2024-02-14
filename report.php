@@ -59,7 +59,7 @@ include('inc/header.php');
 			<div class="row">		
 				<div style="padding-bottom:5px;color:green"><strong>Total Income : </strong><span id="totalIncome"></span></div>
 				<div style="padding-bottom:5px;color:red"><strong>Total Expense : </strong><span id="totalExpense"></span></div>
-				<div style="padding-bottom:5px;color:blue"><strong>Total Saving : </strong><span id="totalSaving"></span></div>
+				<div style="padding-bottom:5px;color:blue"><strong>Total Saving : </strong><span id="totalSavings"></span></div>
 			</div>
 		</div>
 		<div class="panel-heading" id="noRecords" style="display:none;">

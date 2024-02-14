@@ -7,7 +7,7 @@ $db = $database->getConnection();
 
 $expense = new Expense($db);
 
-if(!empty($_POST['action']) && $_POST['action'] == 'listCateogry') {
+if(!empty($_POST['action']) && $_POST['action'] == 'listCategory') {
 	$expense->listCateogry();
 }
 

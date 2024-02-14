@@ -3,7 +3,9 @@ class Report
 {
     private $categoryTable ='expense_categories';
     private $expenseTable = 'expenses';
-    private $incomeCategoryTable = 'expense_income_category';
+    private $incomeTable = 'income_expense';
+    private $incomeCategoryTable = 'income_expense_category';
+
     private $conn;
     
     public function __construct($db)
@@ -42,7 +44,7 @@ class Report
             $stmt->execute();
             $result = $stmt->get_result();
             $records = array();
-            while ($expense = $result->fetch-assoc())
+            while ($expense = $result->fetch_assoc())
             {
                 $rows = array();
                 $rows['id'] = $expense['id'];
@@ -53,6 +55,12 @@ class Report
             }
             $output = array(
                 "data" => $records,
+            );
+            echo json_encode($output);
+        }
+        else{
+            $output = array(
+                "data" => [],
             );
             echo json_encode($output);
         }

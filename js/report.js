@@ -14,38 +14,39 @@ $(document).ready(function()
             dataType:"json",
             success:function(respData)
             {
-                var reportHTML = '';
-                var totalExpense = 0;
-                $('#reportTable').hide();
-                $('#noRecords').hide();
-                respData.data.forEach(function(item)
-                {
-                    reportHTML+= '<tr>';
-                    reportHTML+= '<td>$'+item['amount']+'</td>';
-                    reportHTML+= '<td>$'+item['date']+'</td>';
-                    reportHTML+= '<td>$'+item['category']+'</td>';
-                    reportHTML+= '</tr>';
-                    totalExpense = totalExpense + parseInt(item['amount']);
-                    $('#reportTable').show();
-                });
-                $('#listReports').html(reportHTML);
-                $('#detailSection').hide();
-                $('#totalIncome').text("");
-                $('#totalExpense').text("");
-                $('#totalSavings').text("");
-                respData.income.forEach(function(income)
-                {
-                    $('#totalIncome').text("$"+income)
+                if(respData.data.length>0) {
+                    var reportHTML = '';
+                    var totalExpense = 0;
+                    $('#reportTable').hide();
+                    $('#noRecords').hide();
+                    respData.data.forEach(function(item)
                     {
-                        $('totalIncome').text("$"+income['total']);
-                        $('totalExpense').text("$"+totalExpense);
-                        var finalTotal = income['total'] - totalExpense;
-                        $('#totalSaving').text("$"+finalTotal);
-                        $('#detailSection').show();
-                    }
-                });
-
-                if(!totalExpense)
+                        reportHTML+= '<tr>';
+                        reportHTML+= '<td>₹'+item['amount']+'</td>';
+                        reportHTML+= '<td>'+item['date']+'</td>';
+                        reportHTML+= '<td>'+item['category']+'</td>';
+                        reportHTML+= '</tr>';
+                        totalExpense = totalExpense + parseInt(item['amount']);
+                        $('#reportTable').show();
+                    });
+                    $('#listReports').html(reportHTML);
+                    $('#detailSection').hide();
+                    $('#totalIncome').text("");
+                    $('#totalExpense').text("");
+                    $('#totalSavings').text("");
+                    respData.income.forEach(function(income)
+                    {
+                        $('#totalIncome').text("₹"+income)
+                        {
+                            $('totalIncome').text("₹"+income['total']);
+                            $('totalExpense').text("₹"+totalExpense);
+                            var finalTotal = income['total'] - totalExpense;
+                            $('#totalSavings').text("₹"+finalTotal);
+                            $('#detailSection').show();
+                        }
+                    });
+                }
+                else
                 {
                     $('#noRecords').html("<strong>No record found!</strong>").show();
                 }
