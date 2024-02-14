@@ -1,6 +1,6 @@
 <?php
-class User 
-{	   
+class User {	
+   
 	private $userTable = 'users';	
 	private $conn;
 	
@@ -8,8 +8,7 @@ class User
         $this->conn = $db;
     }
 
-	public function listUsers()
-    {		
+	public function listUsers(){		
 		
 		$sqlQuery = "SELECT id, first_name, last_name, email, password, role
 			FROM ".$this->userTable." ";			
@@ -116,68 +115,6 @@ class User
 	}	
 	
 	public function delete(){
-		}
-		
-		$output = array(
-			"draw"	=>	intval($_POST["draw"]),			
-			"iTotalRecords"	=> 	$displayRecords,
-			"iTotalDisplayRecords"	=>  $allRecords,
-			"data"	=> 	$records
-		);
-		
-		echo json_encode($output);
-	}	
-	
-	public function insert(){
-		
-		if($this->role && $this->email && $this->password && $_SESSION["userid"]) {
-
-			$stmt = $this->conn->prepare("
-				INSERT INTO ".$this->userTable."(`first_name`, `last_name`, `email`, `password`, `role`)
-				VALUES(?, ?, ?, ?, ?)");
-		
-			$this->role = htmlspecialchars(strip_tags($this->role));
-			$this->email = htmlspecialchars(strip_tags($this->email));
-			$this->first_name = htmlspecialchars(strip_tags($this->first_name));
-			$this->last_name = htmlspecialchars(strip_tags($this->last_name));
-			$this->password = md5($this->password);
-			$stmt->bind_param("sssss", $this->first_name, $this->last_name, $this->email, $this->password, $this->role);
-			
-			if($stmt->execute()){
-				return true;
-			}		
-		}
-	}
-	
-	public function update(){
-		
-		if($this->role && $this->email && $_SESSION["userid"]) {
-			
-			$updatePass = '';
-			if($this->password) {
-				$this->password = md5($this->password);
-				$updatePass = ", password = '".$this->password."'";
-			}
-			
-			$stmt = $this->conn->prepare("
-				UPDATE ".$this->userTable." 
-				SET first_name = ?, last_name = ?, email = ?, role = ? $updatePass
-				WHERE id = ?");
-	 
-			$this->role = htmlspecialchars(strip_tags($this->role));
-			$this->email = htmlspecialchars(strip_tags($this->email));
-			$this->first_name = htmlspecialchars(strip_tags($this->first_name));
-			$this->last_name = htmlspecialchars(strip_tags($this->last_name));
-								
-			$stmt->bind_param("ssssi", $this->first_name, $this->last_name, $this->email, $this->role, $this->id);
-			
-			if($stmt->execute()){				
-				return true;
-			}			
-		}	
-	}	
-	
-	public function delete(){
 		if($this->id && $_SESSION["userid"]) {			
 
 			$stmt = $this->conn->prepare("
@@ -195,7 +132,7 @@ class User
 	}
 	
 	public function getUserDetails(){
-		if($this->userid && $_SESSION["userid"]) {			
+		if($this->user_id && $_SESSION["userid"]) {			
 					
 			$sqlQuery = "
 				SELECT id, first_name, last_name, email, password, role
