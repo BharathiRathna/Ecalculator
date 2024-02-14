@@ -9,7 +9,7 @@ $expense = new Expense($db);
 
 if(!$user->loggedIn())
 {
-    header("Location: index.php");
+    header("Location: user.php");
 }
 include('inc/header.php');
 ?>
@@ -28,6 +28,8 @@ include('inc/header.php');
                 <div class="col-md-10">
                     <h3 class="panel-title"></h3>
                 </div>
+                <div class="col-md-2"> <!--style = "align : right";-->
+                    <button id="addUser" class="btn btn-info" title ="Add User">
                 <div class="col-md-2"> <!--style = "align : right";-->
                     <button id="addUser" class="btn btn-info" title ="Add User">
                         <span class="glyphicon glyphicon-plus"></span>
@@ -50,10 +52,13 @@ include('inc/header.php');
     </div>
     <!--Add User Form  -->
     <div id="userModal" class= "modal fade">
+    <div id="userModal" class= "modal fade">
         <div class="modal-dialog">
+            <form action="UserAction.php" method ="post" id="userForm">
             <form action="UserAction.php" method ="post" id="userForm">
                 <div class="modal-content">
                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss ="modal">&times;</button>
                         <button type="button" class="close" data-dismiss ="modal">&times;</button>
                         <h4 class ="modal-title"><i class="fa fa-plus"></i> Edit User</h4>
                     </div>
@@ -68,6 +73,7 @@ include('inc/header.php');
                         </div>
                         <div class="form-group">
                             <label for="Income" class="control-label">First Name</label>
+                            <input type="text" name= "first_name" id="first_name" autocomplete ="off" class="form-control" placeholder="First name">
                             <input type="text" name= "first_name" id="first_name" autocomplete ="off" class="form-control" placeholder="First name">
                         </div>
                         <div class="form-group">

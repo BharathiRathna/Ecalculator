@@ -1,0 +1,22 @@
+/* user-table */
+.adduser{
+    text-align : right;    
+}
+
+/* login-form */
+.login-title{
+    background:#00796B;
+    color:white;
+}
+.login-form{
+    margin-top: 20px;
+}
+.login-message{
+    padding-top:30px;
+}
+.login-formfield{
+    margin-bottom:25px;
+}
+.login-formsubmit{
+    margin-top:10px;
+}

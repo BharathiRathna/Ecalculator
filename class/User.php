@@ -131,66 +131,77 @@ class User
 			}
 		}
 	}
-	
-	public function getUserDetails(){
-		if($this->user_id && $_SESSION["userid"]) {			
-					
-			$sqlQuery = "
-				SELECT id, first_name, last_name, email, password, role
-				FROM ".$this->userTable."			
-				WHERE id = ? ";	
-					
-			$stmt = $this->conn->prepare($sqlQuery);
-			$stmt->bind_param("i", $this->userid);	
-			$stmt->execute();
-			$result = $stmt->get_result();				
-			$records = array();		
-			while ($user = $result->fetch_assoc()) { 				
-				$rows = array();	
-				$rows['id'] = $user['id'];				
-				$rows['first_name'] = $user['first_name'];				
-				$rows['last_name'] = $user['last_name'];
-				$rows['email'] = $user['email'];
-				$rows['role'] = $user['role'];	
-				$records[] = $rows;
-			}		
-			$output = array(			
-				"data"	=> 	$records
-			);
-			echo json_encode($output);
-		}
-	}	
-	
-	public function login(){
-		if($this->email && $this->password) {			
-			$sqlQuery = "
-				SELECT * FROM ".$this->userTable." 
-				WHERE email = ? AND password = ?";	
-			$stmt = $this->conn->prepare($sqlQuery);
-			$password = md5($this->password);
-			$stmt->bind_param("ss", $this->email, $password);	
-			$stmt->execute();
-			$result = $stmt->get_result();
-			if($result->num_rows > 0){
-				$user = $result->fetch_assoc();
-				$_SESSION["userid"] = $user['id'];
-				$_SESSION["role"] = $user['role'];
-				$_SESSION["name"] = $user['email'];					
-				return 1;		
-			} else {
-				return 0;		
-			}			
-		} else {
-			return 0;
-		}
-	}
-	
-	public function loggedIn (){
-		if(!empty($_SESSION["userid"])) {
-			return 1;
-		} else {
-			return 0;
-		}
-	}
+
+    public function getUserDetails()
+    {
+        if($this->user_id && $_SESSION["userid"])
+        {
+            
+            $sqlQuery = "
+            SELECT id, first_name, last_name, email,password,role FROM ".$this->userTable. " WHERE id = ? ";
+
+            $stmt = $this->conn->prepare($sqlQuery);
+            $stmt->bind_param("i", $this->user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $records = array();
+            while ($user = $result->fetch_assoc())
+            {
+                $rows = array();
+                $rows['id'] = $user['id'];
+                $rows['first_name'] = $user['first_name'];
+                $rows['last_name'] = $user['last_name'];
+                $rows['email'] = $user['email'];
+                $rows['role'] = $user['role'];
+                $records[] = $rows;
+            }
+            $output = array(
+                "data" => $records
+            );
+            echo json_encode($output);
+        }
+    }
+
+    public function login()
+    {
+        if($this->email && $this->password)
+        {
+            $sqlQuery = " SELECT * FROM ". $this->userTable." WHERE email = ? AND password = ? ";
+            
+            $stmt = $this->conn->prepare($sqlQuery);
+            $password = md5($this->password);
+            $stmt->bind_param("ss", $this->email,$password);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if($result->num_rows > 0)
+            {
+                $user = mysqli_fetch_assoc($result);
+
+                // $user = $result-fetch_assoc();
+                $_SESSION["user_id"] = $user['id'];
+                $_SESSION["role"] = $user['role'];
+                $_SESSION["name"] = $user['email'];
+                return 1;
+            }else
+            {
+                return 0;
+            }
+        }else
+        {
+            return 0;
+        }
+    }
+
+    public function loggedIn ()
+    {
+        if(!empty($_SESSION["userid"]))
+        {
+            return 1;
+        }else
+        {
+            return 0;
+        }
+    }
+
 }
 ?>
