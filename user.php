@@ -64,7 +64,7 @@ include('inc/header.php');
                             <select name="role" id="role" class="form-control">
                                 <option value="">Select Role</option>
                                 <option value="admin">Admin</option>
-                                <option value="user">User</option>
+                                <!-- <option value="user">User</option> -->
                             </select>
                         </div>
                         <div class="form-group">

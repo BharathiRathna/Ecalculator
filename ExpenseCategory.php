@@ -68,8 +68,8 @@ include_once ('inc/header.php');
                                     <label class="col-md-4 text-right">Status <span class="text-danger">*</span></label>
                                     <div class="col-md-8">
                                         <select name="status" id="status" class="form-control">
-                                            <option value="enable">Enable</option>
-                                            <option value="disable">Disable</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
                                         </select>
                                     </div>
                                 </div>

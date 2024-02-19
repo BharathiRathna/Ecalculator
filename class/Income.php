@@ -1,8 +1,8 @@
 <?php
 class Income 
 {
-    private $incomeTable = 'income_expense';
-    private $incomeCategoryTable ='income_expense_category';
+    private $incomeTable = 'income';
+    private $incomeCategoryTable =' income_categories';
     private $conn;
 
     public function __construct($db){
@@ -212,7 +212,7 @@ class Income
 			$rows = array();			
 			$rows[] = $count;
 			$rows[] = ucfirst($category['name']);
-			$rows[] = $category['status'];				
+			$rows[] = $category['status'] == "1" ? 'Active' : 'Inactive';				
 			$rows[] = '<button type="button" name="update" id="'.$category["id"].'" class="btn btn-warning btn-xs update"><span class="glyphicon glyphicon-edit" title="Edit"></span></button>';
 			$rows[] = '<button type="button" name="delete" id="'.$category["id"].'" class="btn btn-danger btn-xs delete" ><span class="glyphicon glyphicon-remove" title="Delete"></span></button>';
 			$records[] = $rows;
@@ -232,7 +232,22 @@ class Income
     public function insertCategory(){
 		
 		if($this->categoryName && $_SESSION["userid"]) {
-
+			
+			$sqlQuery = "SELECT * FROM ".$this->incomeCategoryTable." WHERE name = ? ";	
+					
+			$stmt = $this->conn->prepare($sqlQuery);
+			$stmt->bind_param("s", $this->categoryName);	
+			$stmt->execute();
+			$result = $stmt->get_result();
+		if($result->num_rows > 0) {
+			$output = array(	
+				"status"  => false,			
+				"message" => 'Income Category Already Exists'
+			);
+			
+			echo json_encode($output);
+		}
+		else{
 			$stmt = $this->conn->prepare("
 				INSERT INTO ".$this->incomeCategoryTable."(`name`, `status`)
 				VALUES(?, ?)");
@@ -244,7 +259,8 @@ class Income
 			
 			if($stmt->execute()){
 				return true;
-			}		
+			}
+		  }		
 		}
 	}
 

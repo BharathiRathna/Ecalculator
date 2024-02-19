@@ -3,8 +3,8 @@ class Report
 {
     private $categoryTable ='expense_categories';
     private $expenseTable = 'expenses';
-    private $incomeTable = 'income_expense';
-    private $incomeCategoryTable = 'income_expense_category';
+    private $incomeTable = 'income';
+    private $incomeCategoryTable = ' income_categories';
 
     private $conn;
     
@@ -15,6 +15,7 @@ class Report
 
     public function getReports()
     {
+        $output = [];
         if($this->fromDate && $this->toDate && $_SESSION["userid"])
         {
             // IncomeReport
@@ -56,14 +57,14 @@ class Report
             $output = array(
                 "data" => $records,
             );
-            echo json_encode($output);
+            
         }
         else{
             $output = array(
                 "data" => [],
             );
-            echo json_encode($output);
         }
+        echo json_encode($output);
     }
 }
 ?>

@@ -19,7 +19,7 @@ $(document).ready(function(){
 				"orderable":false,
 			},
 		],
-		"pageLength": 10
+		"pageLength": 15
 	});	
 	
 	$('#addCategory').click(function(){
@@ -70,11 +70,17 @@ $(document).ready(function(){
 			url:"IncomeCategoryAction.php",
 			method:"POST",
 			data:formData,
-			success:function(data){				
-				$('#categoryForm')[0].reset();
-				$('#categoryModal').modal('hide');				
-				$('#save').attr('disabled', false);
-				categoryRecords.ajax.reload();
+			success:function(data){
+				var result = JSON.parse(data);
+				if(!result.status) {
+					alert(result.message)
+					$('#save').removeAttr('disabled');
+				} else {				
+					$('#categoryForm')[0].reset();
+					$('#categoryModal').modal('hide');				
+					$('#save').attr('disabled', false);
+					categoryRecords.ajax.reload();
+				}
 			}
 		})
 	});		
