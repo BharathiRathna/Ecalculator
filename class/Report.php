@@ -23,6 +23,7 @@ class Report
 				FROM ".$this->incomeTable." AS expense 
 				LEFT JOIN ".$this->incomeCategoryTable." AS category ON expense.category_id = category.id 
 				WHERE expense.user_id = '".$_SESSION["userid"]."' AND expense.date BETWEEN  '".$this->fromDate."' AND '".$this->toDate."'";
+
 					
 			$stmt = $this->conn->prepare($sqlQuery);			
 			$stmt->execute();
@@ -56,6 +57,7 @@ class Report
             }
             $output = array(
                 "data" => $records,
+                "income" => $incomeRecords
             );
             
         }

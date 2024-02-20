@@ -1,5 +1,5 @@
 <h3><?php if($_SESSION["userid"]) { echo "Logged in : ".ucfirst($_SESSION["name"]); } ?> | <a href="logout.php">Logout</a> </h3><br>
-<p><strong>Welcome <?php echo ucfirst($_SESSION["role"]); ?></strong></p>	
+<!-- <p><strong>Welcome <?php //echo ucfirst($_SESSION["role"]); ?></strong></p>	 -->
 <ul class="nav nav-tabs">	
 	<?php if($_SESSION["role"] == 'admin') { ?>
 		<li id="expense"><a href="expense.php">Expense</a></li>
