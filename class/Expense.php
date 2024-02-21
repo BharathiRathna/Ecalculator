@@ -94,14 +94,14 @@ class Expense {
 			
 			$stmt = $this->conn->prepare("
 			UPDATE ".$this->expenseTable." 
-			SET amount = ?, date = ?, category_id = ?,
+			SET amount = ?, date = ?, category_id = ?
 			WHERE id = ?");
 	 
 			$this->amount = htmlspecialchars(strip_tags($this->amount));
 			$this->expense_date = htmlspecialchars(strip_tags($this->expense_date));
 			$this->expense_category = htmlspecialchars(strip_tags($this->expense_category));
 								
-			$stmt->bind_param("isiis", $this->amount, $this->expense_date, $this->expense_category,$this->id);
+			$stmt->bind_param("isii", $this->amount, $this->expense_date, $this->expense_category,$this->id);
 			
 			if($stmt->execute()){				
 				return true;
