@@ -21,7 +21,7 @@ include('inc/header.php');
 <script src="js/user.js"></script>
 
 <div class="container">
-    <h2> Expense Calculator System</h2><br>
+    <!-- <h2> Expense Calculator System</h2><br> -->
     <?php include_once('TopMenus.php');?>
     <div>
         <div class="panel-handling">
@@ -31,7 +31,7 @@ include('inc/header.php');
                 </div>
                 <div class="col-md-2" align="right"> <!--style = "align : right";-->
                     <button id="addUser" class="btn btn-info" title ="Add User">
-                        <span class="glyphicon glyphicon-plus"></span>
+                        <span class="glyphicon glyphicon-plus"> Add-User</span>
                     </button>
                 </div>
             </div>
@@ -39,7 +39,7 @@ include('inc/header.php');
         <table id="userListing" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>S.No</th>
+                    <th>S.no</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>

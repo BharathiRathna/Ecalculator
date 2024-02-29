@@ -86,9 +86,20 @@ $(document).ready(function(){
 	});		
 
 	$("#incomeCategoryListing").on('click', '.delete', function(){
-		var id = $(this).attr("id");		
+
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You want to delete this!",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, delete it!"
+		}).then((result) => {
+			console.log(result)
+			if (result.value) {
+				var id = $(this).attr("id");		
 		var action = "deleteCategory";
-		if(confirm("Are you sure you want to delete this record?")) {
+		
 			$.ajax({
 				url:"IncomeCategoryAction.php",
 				method:"POST",
@@ -97,9 +108,8 @@ $(document).ready(function(){
 					categoryRecords.ajax.reload();
 				}
 			})
-		} else {
-			return false;
-		}
+			}
+		});
 	});
 	
 });
