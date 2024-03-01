@@ -54,7 +54,7 @@ class Income
 				$rows[] = $count;
 				$rows[] = ucfirst($income['amount']);
 				$rows[] = $income['name'];	
-				$rows[] = $income['date'];			
+				$rows[] = date("d-m-Y", strtotime($income['date']));			
 				$rows[] = '<button type="button" name="update" id="'.$income["id"].'" class="btn btn-warning btn-xs update"><span class="glyphicon glyphicon-edit" title="Edit"></span></button>';
 				$rows[] = '<button type="button" name="delete" id="'.$income["id"].'" class="btn btn-danger btn-xs delete" ><span class="glyphicon glyphicon-remove" title="Delete"></span></button>';
 				$records[] = $rows;
