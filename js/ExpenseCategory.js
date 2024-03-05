@@ -70,6 +70,7 @@ $(document).ready(function () {
 			method: "POST",
 			data: formData,
 			success: function (data) {
+				console.log(data);
 				var result = JSON.parse(data);
 
 				if (!result.status) {

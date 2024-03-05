@@ -53,7 +53,10 @@ $(document).ready(function(){
 					});														
 					$('.modal-title').html("<i class='fa fa-plus'></i> Edit category");
 					$('#action').val('updateCategory');
-					$('#save').val('Save');					
+					$('#save').val('Save');
+					categoryRecords.ajax.reload();					
+					
+
 				}).modal({
 					backdrop: 'static',
 					keyboard: false
@@ -71,6 +74,7 @@ $(document).ready(function(){
 			method:"POST",
 			data:formData,
 			success:function(data){
+				console.log(data);
 				var result = JSON.parse(data);
 				if(!result.status) {
 					alert(result.message)

@@ -265,12 +265,19 @@ class Expense {
 			$this->status = htmlspecialchars(strip_tags($this->status));
 								
 			$stmt->bind_param("ssi", $this->categoryName, $this->status, $this->id);
-			
+			$output;
 			if($stmt->execute()){				
-				return "true";
+				$output = array(			
+					"status"	=> 	true,
+					"message" => ""
+				);
 			}	else{
-				return $stmt->errorInfo();
-			}		
+				$output = array(			
+					"status"	=> 	false,
+					"message"	=> $stmt->errorInfo()
+				);				
+			}	
+			echo json_encode($output);
 		}	
 	}	
 	

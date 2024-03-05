@@ -17,5 +17,6 @@
 <!---delete  sweetealert ---->
 
 <script src="js/sweetalert2.min.js"></script>
+<script src="js/jquery.number.min.js"></script>
 </head>
 
