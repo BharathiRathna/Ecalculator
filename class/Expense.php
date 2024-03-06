@@ -50,7 +50,7 @@ class Expense {
 				$rows[] = $count;
 				$rows[] = ucfirst($expense['amount']);
 				$rows[] = $expense['name'];	
-				$rows[] = $expense['date'];			
+				$rows[] = date("d-m-Y", strtotime($expense['date']));			
 				$rows[] = '<button type="button" name="update" id="'.$expense["id"].'" class="btn btn-warning btn-xs update"><span class="glyphicon glyphicon-edit" title="Edit"></span></button>';
 				$rows[] = '<button type="button" name="delete" id="'.$expense["id"].'" class="btn btn-danger btn-xs delete" ><span class="glyphicon glyphicon-remove" title="Delete"></span></button>';
 				$records[] = $rows;
@@ -101,7 +101,7 @@ class Expense {
 			$this->expense_date = htmlspecialchars(strip_tags($this->expense_date));
 			$this->expense_category = htmlspecialchars(strip_tags($this->expense_category));
 								
-			$stmt->bind_param("isii", $this->amount, $this->expense_date, $this->expense_category, $this->id);
+			$stmt->bind_param("isii", $this->amount, $this->expense_date, $this->expense_category,$this->id);
 			
 			if($stmt->execute()){				
 				return true;
@@ -200,7 +200,7 @@ class Expense {
 			$rows = array();			
 			$rows[] = $count;
 			$rows[] = ucfirst($category['name']);
-			$rows[] = $category['status'];				
+			$rows[] = $category['status'] == "1" ? 'Active' : 'Inactive';				
 			$rows[] = '<button type="button" name="update" id="'.$category["id"].'" class="btn btn-warning btn-xs update"><span class="glyphicon glyphicon-edit" title="Edit"></span></button>';
 			$rows[] = '<button type="button" name="delete" id="'.$category["id"].'" class="btn btn-danger btn-xs delete" ><span class="glyphicon glyphicon-remove" title="Delete"></span></button>';
 			$records[] = $rows;
@@ -221,6 +221,21 @@ class Expense {
 		
 		if($this->categoryName && $_SESSION["userid"]) {
 
+			$sqlQuery = "SELECT * FROM ".$this->categoryTable." WHERE name = ? ";	
+					
+			$stmt = $this->conn->prepare($sqlQuery);
+			$stmt->bind_param("s", $this->categoryName);	
+			$stmt->execute();
+			$result = $stmt->get_result();
+		if($result->num_rows > 0) {
+			$output = array(	
+				"status"  => false,			
+				"message" => 'Expense Category Already Exists'
+			);
+			
+			echo json_encode($output);
+		}
+		else{
 			$stmt = $this->conn->prepare("
 				INSERT INTO ".$this->categoryTable."(`name`, `status`)
 				VALUES(?, ?)");
@@ -233,6 +248,7 @@ class Expense {
 			if($stmt->execute()){
 				return true;
 			}		
+		}
 		}
 	}
 	
@@ -249,10 +265,19 @@ class Expense {
 			$this->status = htmlspecialchars(strip_tags($this->status));
 								
 			$stmt->bind_param("ssi", $this->categoryName, $this->status, $this->id);
-			
+			$output;
 			if($stmt->execute()){				
-				return true;
-			}			
+				$output = array(			
+					"status"	=> 	true,
+					"message" => ""
+				);
+			}	else{
+				$output = array(			
+					"status"	=> 	false,
+					"message"	=> $stmt->errorInfo()
+				);				
+			}	
+			echo json_encode($output);
 		}	
 	}	
 	

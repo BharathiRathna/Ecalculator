@@ -4,8 +4,6 @@ $(document).ready(function()
     {
         var fromDate = $('#from_date').val();
         var toDate = $('#to_date').val();
-
-        // console.log("==fromDate=="+fromDate+"==toDate="+toDate);
         var action = 'getReports';
         $.ajax({
             url:'ReportAction.php',
@@ -36,14 +34,11 @@ $(document).ready(function()
                     $('#totalSavings').text("");
                     respData.income.forEach(function(income)
                     {
-                        $('#totalIncome').text("₹"+income)
-                        {
-                            $('totalIncome').text("₹"+income['total']);
-                            $('totalExpense').text("₹"+totalExpense);
-                            var finalTotal = income['total'] - totalExpense;
-                            $('#totalSavings').text("₹"+finalTotal);
-                            $('#detailSection').show();
-                        }
+                        $('#totalIncome').text("₹"+income['total']);
+                        $('#totalExpense').text("₹"+totalExpense);
+                        var finalTotal = income['total'] - totalExpense;
+                        $('#totalSavings').text("₹"+finalTotal);
+                        $('#detailSection').show();
                     });
                 }
                 else

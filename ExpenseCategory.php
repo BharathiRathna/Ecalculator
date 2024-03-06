@@ -18,7 +18,7 @@ include_once ('inc/header.php');
 <script src="js/general.js"></script>
 <script src="js/ExpenseCategory.js"></script>
 <div class="container">
-    <h2>Expense Management System</h2><br>
+    <!-- <h2>Expense Management System</h2><br> -->
     <?php include_once('TopMenus.php');?>
     <div>
         <div class="panel-heading">
@@ -27,7 +27,7 @@ include_once ('inc/header.php');
                     <h3 class="panel-title"></h3>
                 </div>
                 <div class="col-md-2" align="right">
-                    <button type="button" id="addCategory" class="btn btn-info" title="Add Category"><span class="glyphicon glyphicon-plus"></span>
+                    <button type="button" id="addCategory" class="btn btn-info" title="Add Category"><span class="glyphicon glyphicon-plus"> Add-Expensecategory</span>
                     </button>
                 </div>
             </div>
@@ -35,7 +35,7 @@ include_once ('inc/header.php');
         <table id="categoryListing" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Sn.</th>					
+                    <th>S.no</th>					
 					<th>Category</th>					
 					<th>Status</th>					
 					<th>Edit</th>
@@ -68,8 +68,8 @@ include_once ('inc/header.php');
                                     <label class="col-md-4 text-right">Status <span class="text-danger">*</span></label>
                                     <div class="col-md-8">
                                         <select name="status" id="status" class="form-control">
-                                            <option value="enable">Enable</option>
-                                            <option value="disable">Disable</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
                                         </select>
                                     </div>
                                 </div>

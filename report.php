@@ -24,13 +24,13 @@ include('inc/header.php');
 <script src="js/user.js"></script>
 <script src="js/report.js"></script>
 <div class="container" style="">
-    <h2>Expense Management System</h2><br>
+    <!-- <h2>Expense Management System</h2><br> -->
     <?php include('TopMenus.php'); ?>
     <div> 	
 		<div class="panel-heading">
 			<div class="row">	
 				<div>
-					<h4>View Income and Expense Reports</h4>
+					<h4>View Custom Expense Reports</h4>
 				</div>
 				<div class="col-md-2" style="padding-left:0px;">
 					<input type="date" class="form-control" id="from_date" name="from_date" placeholder="From date" >
@@ -55,13 +55,13 @@ include('inc/header.php');
 			
 			</tbody>
 		</table>
-		<div class="panel-heading" id="detailSection" style="display:none;">
+		<!-- <div class="panel-heading" id="detailSection" style="display:none;">
 			<div class="row">		
 				<div style="padding-bottom:5px;color:green"><strong>Total Income : </strong><span id="totalIncome"></span></div>
 				<div style="padding-bottom:5px;color:red"><strong>Total Expense : </strong><span id="totalExpense"></span></div>
 				<div style="padding-bottom:5px;color:blue"><strong>Total Saving : </strong><span id="totalSavings"></span></div>
 			</div>
-		</div>
+		</div> -->
 		<div class="panel-heading" id="noRecords" style="display:none;">
 		</div>
 	</div>

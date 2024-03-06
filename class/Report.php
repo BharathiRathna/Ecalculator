@@ -3,8 +3,8 @@ class Report
 {
     private $categoryTable ='expense_categories';
     private $expenseTable = 'expenses';
-    private $incomeTable = 'income_expense';
-    private $incomeCategoryTable = 'income_expense_category';
+    private $incomeTable = 'income';
+    private $incomeCategoryTable = ' income_categories';
 
     private $conn;
     
@@ -15,6 +15,7 @@ class Report
 
     public function getReports()
     {
+        $output = [];
         if($this->fromDate && $this->toDate && $_SESSION["userid"])
         {
             // IncomeReport
@@ -22,6 +23,7 @@ class Report
 				FROM ".$this->incomeTable." AS expense 
 				LEFT JOIN ".$this->incomeCategoryTable." AS category ON expense.category_id = category.id 
 				WHERE expense.user_id = '".$_SESSION["userid"]."' AND expense.date BETWEEN  '".$this->fromDate."' AND '".$this->toDate."'";
+
 					
 			$stmt = $this->conn->prepare($sqlQuery);			
 			$stmt->execute();
@@ -55,15 +57,16 @@ class Report
             }
             $output = array(
                 "data" => $records,
+                "income" => $incomeRecords
             );
-            echo json_encode($output);
+            
         }
         else{
             $output = array(
                 "data" => [],
             );
-            echo json_encode($output);
         }
+        echo json_encode($output);
     }
 }
 ?>

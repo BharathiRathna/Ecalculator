@@ -1,8 +1,8 @@
 <?php
 class Income 
 {
-    private $incomeTable = 'income_expense';
-    private $incomeCategoryTable ='income_expense_category';
+    private $incomeTable = 'income';
+    private $incomeCategoryTable =' income_categories';
     private $conn;
 
     public function __construct($db){
@@ -52,9 +52,9 @@ class Income
 			while ($income = $result->fetch_assoc()) { 				
 				$rows = array();			
 				$rows[] = $count;
-				$rows[] = ucfirst($income['amount']);
+				$rows[] = ucfirst($this->IND_money_format($income['amount']));
 				$rows[] = $income['name'];	
-				$rows[] = $income['date'];			
+				$rows[] = date("d-m-Y", strtotime($income['date']));			
 				$rows[] = '<button type="button" name="update" id="'.$income["id"].'" class="btn btn-warning btn-xs update"><span class="glyphicon glyphicon-edit" title="Edit"></span></button>';
 				$rows[] = '<button type="button" name="delete" id="'.$income["id"].'" class="btn btn-danger btn-xs delete" ><span class="glyphicon glyphicon-remove" title="Delete"></span></button>';
 				$records[] = $rows;
@@ -70,6 +70,31 @@ class Income
 
             echo json_encode($output);
         }
+    }
+
+	public function IND_money_format($number){
+        $decimal = (string)($number - floor($number));
+        $money = floor($number);
+        $length = strlen($money);
+        $delimiter = '';
+        $money = strrev($money);
+
+        for($i=0;$i<$length;$i++){
+            if(( $i==3 || ($i>3 && ($i-1)%2==0) )&& $i!=$length){
+                $delimiter .=',';
+            }
+            $delimiter .=$money[$i];
+        }
+
+        $result = strrev($delimiter);
+        $decimal = preg_replace("/0\./i", ".", $decimal);
+        $decimal = substr($decimal, 0, 3);
+
+        if( $decimal != '0'){
+            $result = $result.$decimal;
+        }
+
+        return $result;
     }
 
     public function insert()
@@ -212,7 +237,7 @@ class Income
 			$rows = array();			
 			$rows[] = $count;
 			$rows[] = ucfirst($category['name']);
-			$rows[] = $category['status'];				
+			$rows[] = $category['status'] == "1" ? 'Active' : 'Inactive';				
 			$rows[] = '<button type="button" name="update" id="'.$category["id"].'" class="btn btn-warning btn-xs update"><span class="glyphicon glyphicon-edit" title="Edit"></span></button>';
 			$rows[] = '<button type="button" name="delete" id="'.$category["id"].'" class="btn btn-danger btn-xs delete" ><span class="glyphicon glyphicon-remove" title="Delete"></span></button>';
 			$records[] = $rows;
@@ -232,7 +257,22 @@ class Income
     public function insertCategory(){
 		
 		if($this->categoryName && $_SESSION["userid"]) {
-
+			
+			$sqlQuery = "SELECT * FROM ".$this->incomeCategoryTable." WHERE name = ? ";	
+					
+			$stmt = $this->conn->prepare($sqlQuery);
+			$stmt->bind_param("s", $this->categoryName);	
+			$stmt->execute();
+			$result = $stmt->get_result();
+		if($result->num_rows > 0) {
+			$output = array(	
+				"status"  => false,			
+				"message" => 'Income Category Already Exists'
+			);
+			
+			echo json_encode($output);
+		}
+		else{
 			$stmt = $this->conn->prepare("
 				INSERT INTO ".$this->incomeCategoryTable."(`name`, `status`)
 				VALUES(?, ?)");
@@ -244,7 +284,8 @@ class Income
 			
 			if($stmt->execute()){
 				return true;
-			}		
+			}
+		  }		
 		}
 	}
 
@@ -262,9 +303,19 @@ class Income
 								
 			$stmt->bind_param("ssi", $this->categoryName, $this->status, $this->id);
 			
+			$output;
 			if($stmt->execute()){				
-				return true;
-			}			
+				$output = array(			
+					"status"	=> 	true,
+					"message" => ""
+				);
+			}	else{
+				$output = array(			
+					"status"	=> 	false,
+					"message"	=> $stmt->errorInfo()
+				);				
+			}	
+			echo json_encode($output);		
 		}	
 	}
 

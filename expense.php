@@ -30,7 +30,7 @@ include('inc/header.php');
                     <h3 class="panel-title"></h3>
                 </div>
                 <div class="col-md-2" align="right">
-                <button type ="button" id="addExpense" class="btn btn-info" title="Add expense"><span class="glyphicon glyphicon-plus"></span></button>
+                <button type ="button" id="addExpense" class="btn btn-info" title="Add expense"><span class="glyphicon glyphicon-plus"> Add-Expense</span></button>
                 </div>
             </div>
         </div>

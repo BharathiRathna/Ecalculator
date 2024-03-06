@@ -79,10 +79,20 @@ $(document).ready(function(){
 		})
 	});		
 
-	$("#expenseListing").on('click', '.delete', function(){
+	$("#expenseListing").on('click', '.delete', function()
+	{
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You want delete this!",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, delete it!"
+		}).then((result) => {
+			console.log(result)
 		var id = $(this).attr("id");		
 		var action = "deleteExpense";
-		if(confirm("Are you sure you want to delete this record?")) {
+		
 			$.ajax({
 				url:"ExpenseAction.php",
 				method:"POST",
@@ -91,9 +101,8 @@ $(document).ready(function(){
 					expenseRecords.ajax.reload();
 				}
 			})
-		} else {
-			return false;
-		}
+		});
 	});
+
 	
 });

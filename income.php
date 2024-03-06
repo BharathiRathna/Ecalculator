@@ -21,7 +21,7 @@ include('inc/header.php');
 <script src="js/income.js"></script>
 
 <div class="container" style="">  
-	<h2>Expense Management System</h2>	
+	<!-- <h2>Expense Management System</h2>	 -->
 	<br>
 	<?php include('TopMenus.php'); ?>	
 	<div> 	
@@ -31,14 +31,14 @@ include('inc/header.php');
 					<h3 class="panel-title"></h3>
 				</div>
 				<div class="col-md-2" align="right">
-					<button type="button" id="addIncome" class="btn btn-info" title="Add Income"><span class="glyphicon glyphicon-plus"></span></button>
+					<button type="button" id="addIncome" class="btn btn-info" title="Add Income"><span class="glyphicon glyphicon-plus"> Add-Income</span></button>
 				</div>
 			</div>
 		</div>
 		<table id="incomeListing" class="table table-bordered table-striped">
 			<thead>
 				<tr>						
-					<th>Sn.</th>					
+					<th>S.no</th>					
 					<th>Amount</th>					
 					<th>Category</th>
 					<th>Date</th>						

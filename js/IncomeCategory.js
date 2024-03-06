@@ -19,7 +19,7 @@ $(document).ready(function(){
 				"orderable":false,
 			},
 		],
-		"pageLength": 10
+		"pageLength": 15
 	});	
 	
 	$('#addCategory').click(function(){
@@ -53,7 +53,10 @@ $(document).ready(function(){
 					});														
 					$('.modal-title').html("<i class='fa fa-plus'></i> Edit category");
 					$('#action').val('updateCategory');
-					$('#save').val('Save');					
+					$('#save').val('Save');
+					categoryRecords.ajax.reload();					
+					
+
 				}).modal({
 					backdrop: 'static',
 					keyboard: false
@@ -70,19 +73,37 @@ $(document).ready(function(){
 			url:"IncomeCategoryAction.php",
 			method:"POST",
 			data:formData,
-			success:function(data){				
-				$('#categoryForm')[0].reset();
-				$('#categoryModal').modal('hide');				
-				$('#save').attr('disabled', false);
-				categoryRecords.ajax.reload();
+			success:function(data){
+				console.log(data);
+				var result = JSON.parse(data);
+				if(!result.status) {
+					alert(result.message)
+					$('#save').removeAttr('disabled');
+				} else {				
+					$('#categoryForm')[0].reset();
+					$('#categoryModal').modal('hide');				
+					$('#save').attr('disabled', false);
+					categoryRecords.ajax.reload();
+				}
 			}
 		})
 	});		
 
 	$("#incomeCategoryListing").on('click', '.delete', function(){
-		var id = $(this).attr("id");		
+
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You want to delete this!",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, delete it!"
+		}).then((result) => {
+			console.log(result)
+			if (result.value) {
+				var id = $(this).attr("id");		
 		var action = "deleteCategory";
-		if(confirm("Are you sure you want to delete this record?")) {
+		
 			$.ajax({
 				url:"IncomeCategoryAction.php",
 				method:"POST",
@@ -91,9 +112,8 @@ $(document).ready(function(){
 					categoryRecords.ajax.reload();
 				}
 			})
-		} else {
-			return false;
-		}
+			}
+		});
 	});
 	
 });
